@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+      - ${MONGO_PATH}:/data/db
+    ports:
+      - ${MONGO_PORTS}:27017
+
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:21.1.1
+#    ports:
+#      - 8080:8080
+#    environment:
+#      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+#      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+#    command: start-dev
+#    volumes:
+#      - ${KEYCLOAK_PATH}:/opt/jboss/keycloak/standalone/data
+
+  app:
+    build:
+      context: ./app
+      dockerfile: deploy/app/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app:/app
+    environment:
+      - DB_ROOT_USERNAME=${DB_ROOT_USERNAME}
+      - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MONGO_PATH=${MONGO_PATH}
+      - MONGO_PORTS=${MONGO_PORTS}
+      - MONGO_HOST=${MONGO_HOST}
+      - ME_CONFIG_MONGODB_URL=${ME_CONFIG_MONGODB_URL}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_COLLECTION=${MONGO_COLLECTION}
+      - PUBLIC_KEY_KEYCLOAK=${PUBLIC_KEY_KEYCLOAK}
