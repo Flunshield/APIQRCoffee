@@ -5,7 +5,7 @@ export interface Qrcode
     _id?: ObjectId;
     idKeycloak: string;
     backgroundColor?: string;
-    ForegroundColor?: string;
+    foregroundColor?: string;
     ErrorLevel?: string;
     value?: string;
     size?: number;

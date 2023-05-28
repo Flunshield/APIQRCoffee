@@ -7,7 +7,7 @@ export async function pushQrcode(data: Qrcode) {
         idKeycloak: data.idKeycloak,
         name: data.name,
         backgroundColor: data.backgroundColor,
-        foregroundColor: data.ForegroundColor,
+        foregroundColor: data.foregroundColor,
         errorLevel: data.ErrorLevel,
         value: data.value,
         size: data.size,
