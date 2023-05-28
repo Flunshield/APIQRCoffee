@@ -12,3 +12,14 @@ export interface Qrcode
     includeMargin?: boolean;
     name?: string;
 }
+
+export interface ModelVcard extends Qrcode {
+    name?: string;
+    firstName?: string;
+    lastName?: string;
+    job?: string;
+    email?: string;
+    telephone?: string;
+    adresse?: string;
+    interface?: string;
+}
